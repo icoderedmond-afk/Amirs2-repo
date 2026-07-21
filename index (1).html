@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blox Fruits - Ultimate Guide & Quiz Hub</title>
+    <style>
+        :root {
+            --primary: #1a1e29;
+            --secondary: #252b3b;
+            --accent-blue: #00d2ff;
+            --accent-gold: #ffb703;
+            --accent-purple: #9d4edd;
+            --text-light: #f8f9fa;
+            --text-muted: #a0aec0;
+            --card-bg: #2d3748;
+            --success: #38a169;
+            --danger: #e53e3e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 4px solid var(--accent-gold);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        header h1 {
+            font-size: 3rem;
+            color: var(--accent-gold);
+            text-shadow: 0 0 10px rgba(255, 183, 3, 0.5);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        nav {
+            background: var(--secondary);
+            display: flex;
+            justify-content: center;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-blue);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--accent-blue);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--accent-blue);
+            padding-bottom: 8px;
+            display: inline-block;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--secondary);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 3px solid var(--accent-purple);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.4);
+        }
+
+        .card h3 {
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .card p, .card ul {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .card ul {
+            list-style-position: inside;
+            margin-top: 10px;
+        }
+
+        /* Quiz Styling */
+        .quiz-container {
+            background: var(--secondary);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .question-box {
+            background: var(--primary);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        @media (max-width: 600px) {
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .btn {
+            background: var(--card-bg);
+            color: var(--text-light);
+            border: 2px solid #4a5568;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .btn:hover {
+            background: var(--accent-purple);
+            border-color: var(--accent-purple);
+            color: white;
+        }
+
+        .btn.correct {
+            background-color: var(--success) !important;
+            border-color: var(--success) !important;
+            color: white;
+        }
+
+        .btn.wrong {
+            background-color: var(--danger) !important;
+            border-color: var(--danger) !important;
+            color: white;
+        }
+
+        .action-btn {
+            background: linear-gradient(45deg, #00d2ff, #3a7bd5);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .score-board {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--accent-gold);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #11141d;
+            color: var(--text-muted);
+            margin-top: 60px;
+            border-top: 1px solid #2d3748;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .badge-paramecia { background-color: #3182ce; color: white; }
+        .badge-logia { background-color: #dd6b20; color: white; }
+        .badge-zoan { background-color: #38a169; color: white; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Blox Fruits Guide</h1>
+        <p>Explore the seas, master powerful Devil Fruits, and test your knowledge!</p>
+    </header>
+
+    <nav>
+        <a href="#about">About</a>
+        <a href="#fruits">Fruit Types</a>
+        <a href="#seas">The Seas</a>
+        <a href="#quiz">Random Quiz</a>
+    </nav>
+
+    <div class="container">
+        <!-- About Section -->
+        <section id="about">
+            <h2 class="section-title">What is Blox Fruits?</h2>
+            <div class="card">
+                <p><strong>Blox Fruits</strong> is one of the most popular experiences on Roblox, heavily inspired by the famous anime series <em>One Piece</em>. Players embark on a grand adventure across vast oceans, choosing either to become a powerful Swordsman or a formidable Fruit User.</p>
+                <br>
+                <p>Your main objective is to level up your character, discover rare Blox Fruits that grant superhuman abilities, defeat challenging bosses, unlock secret fighting styles, and navigate through three expansive Seas.</p>
+            </div>
+        </section>
+
+        <!-- Fruit Types Section -->
+        <section id="fruits">
+            <h2 class="section-title">Blox Fruit Categories</h2>
+            <div class="grid">
+                <div class="card">
+                    <span class="badge badge-paramecia">Natural</span>
+                    <h3>Natural (Paramecia)</h3>
+                    <p>Grants unique superhuman physical abilities or environmental manipulation.</p>
+                    <ul>
+                        <li><strong>Popular Examples:</strong> Dough, Portal, Spirit, Venom</li>
+                        <li><strong>Specialty:</strong> Versatile skill sets, utility, and crowd control.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <span class="badge badge-logia">Elemental</span>
+                    <h3>Elemental (Logia)</h3>
+                    <p>Allows the user to create, control, and transform their body into natural elements.</p>
+                    <ul>
+                        <li><strong>Popular Examples:</strong> Light, Magma, Ice, Blizzard</li>
+                        <li><strong>Specialty:</strong> Passive immunity to regular NPC attacks unless enhanced with Haki. Great for grinding!</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <span class="badge badge-zoan">Beast</span>
+                    <h3>Beast (Zoan)</h3>
+                    <p>Allows the user to transform into mythical creatures or animals, boosting physical stats.</p>
+                    <ul>
+                        <li><strong>Popular Examples:</strong> Dragon, Buddha, Leopard, Phoenix</li>
+                        <li><strong>Specialty:</strong> High damage resistance, massive hitboxes, and durability.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Seas Section -->
+        <section id="seas">
+            <h2 class="section-title">Progression Across the Seas</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>First Sea (First Sea)</h3>
+                    <p><strong>Level Req:</strong> 1 - 700</p>
+                    <p>The starting ocean. Focus on learning core mechanics, purchasing your first swords/fruits, and defeating the Ice Admiral to reach the Second Sea.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Second Sea (Second Sea)</h3>
+                    <p><strong>Level Req:</strong> 700 - 1500</p>
+                    <p>Introduces Fruit Awakenings, Trading, Factory Raids, and Sea Events. A major power surge occurs here as you awaken abilities.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Third Sea (Third Sea)</h3>
+                    <p><strong>Level Req:</strong> 1500 - 2550+</p>
+                    <p>Endgame content including Sea Beasts, Leviathan, Race V4 Transformations, Cursed Dual Katana, and high-tier PvP combat.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Quiz Section -->
+        <section id="quiz">
+            <h2 class="section-title">Randomized Blox Fruits Quiz</h2>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <div class="score-board">Score: <span id="score">0</span></div>
+                    <button class="action-btn" onclick="generateNewQuestion()">Randomize New Question 🎲</button>
+                </div>
+
+                <div class="question-box" id="question">
+                    Click the button above or answer to start!
+                </div>
+
+                <div class="options-grid" id="options">
+                    <!-- Buttons generated dynamically -->
+                </div>
+
+                <p id="feedback" style="margin-top: 15px; font-weight: bold;"></p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>Blox Fruits Fan Hub & Interactive Guide &copy; 2026</p>
+    </footer>
+
+    <script>
+        // Database of Blox Fruits Questions
+        const questionBank = [
+            {
+                question: "Which Elemental (Logia) fruit is widely considered the best for low-level grinding in First Sea?",
+                options: ["Light", "Gravity", "Barrier", "Falcon"],
+                correct: 0
+            },
+            {
+                question: "At what level can players travel to the Second Sea?",
+                options: ["500", "700", "1000", "1500"],
+                correct: 1
+            },
+            {
+                question: "Which fruit transformation allows you to turn into a giant glowing golden figure?",
+                options: ["Dragon", "Leopard", "Buddha", "Venom"],
+                correct: 2
+            },
+            {
+                question: "Where do you go to awaken Blox Fruits in the Second Sea?",
+                options: ["Mansion", "Raid Laboratory / Mysterious Room", "Colosseum", "Graveyard"],
+                correct: 1
+            },
+            {
+                question: "Which of the following is NOT an Elemental (Logia) fruit?",
+                options: ["Magma", "Ice", "Dough (Unawakened)", "Flame"],
+                correct: 2
+            },
+            {
+                question: "What is the primary currency used alongside Money to buy fragments and awaken fruits?",
+                options: ["Gems", "Beli / Money", "Fragments", "Robux"],
+                correct: 2
+            },
+            {
+                question: "Which fighting style requires 400 Mastery on Electric, Dark Step, Water Kung Fu, and Dragon Breath?",
+                options: ["Godhuman", "Superhuman", "Electric Claw", "Death Step"],
+                correct: 1
+            },
+            {
+                question: "What NPC sells the Blox Fruit Dealer's Cousin / Gacha rolls?",
+                options: ["Blox Fruit Dealer", "Blox Fruit Gacha", "Mysterious Scientist", "El Perro"],
+                correct: 1
+            },
+            {
+                question: "Which sword is obtained by combining the Tushita and Yama swords?",
+                options: ["True Triple Katana", "Cursed Dual Katana", "Dark Blade", "Yoru"],
+                correct: 1
+            },
+            {
+                question: "What level is required to access the Third Sea?",
+                options: ["1200", "1500", "1800", "2000"],
+                correct: 1
+            },
+            {
+                question: "Which race upgrade introduces active awakening abilities with custom wings/effects?",
+                options: ["Race V2", "Race V3", "Race V4", "Race V1"],
+                correct: 2
+            },
+            {
+                question: "What boss must you defeat to unlock the entrance to Second Sea?",
+                options: ["Don Swan", "Ice Admiral", "Tide Keeper", "Thunder God"],
+                correct: 1
+            }
+        ];
+
+        let score = 0;
+        let currentQuestion = null;
+        let answered = false;
+
+        function getRandomQuestion() {
+            const randomIndex = Math.floor(Math.random() * questionBank.length);
+            return questionBank[randomIndex];
+        }
+
+        function generateNewQuestion() {
+            answered = false;
+            document.getElementById('feedback').innerText = '';
+            
+            // Pick a random question from pool
+            currentQuestion = getRandomQuestion();
+            
+            document.getElementById('question').innerText = currentQuestion.question;
+            
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+
+            currentQuestion.options.forEach((optionText, index) => {
+                const button = document.createElement('button');
+                button.className = 'btn';
+                button.innerText = optionText;
+                button.onclick = () => selectOption(index, button);
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        function selectOption(selectedIndex, selectedButton) {
+            if (answered) return;
+            answered = true;
+
+            const buttons = document.querySelectorAll('.options-grid .btn');
+            
+            if (selectedIndex === currentQuestion.correct) {
+                selectedButton.classList.add('correct');
+                document.getElementById('feedback').innerText = "✨ Correct Answer!";
+                document.getElementById('feedback').style.color = "var(--success)";
+                score += 10;
+                document.getElementById('score').innerText = score;
+            } else {
+                selectedButton.classList.add('wrong');
+                buttons[currentQuestion.correct].classList.add('correct');
+                document.getElementById('feedback').innerText = "❌ Wrong Answer! Try another question.";
+                document.getElementById('feedback').style.color = "var(--danger)";
+            }
+        }
+
+        // Initialize first question on load
+        window.onload = generateNewQuestion;
+    </script>
+</body>
+</html>
